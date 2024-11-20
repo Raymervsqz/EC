@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Factura</title>
+
+<!-- Estilos de la factura -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        color: #000;
+    }
+    .invoice-box {
+        width: 58mm; /* Ancho de 58mm para impresión en recibo */
+        margin: 0 auto;
+        padding: 10px;
+        border: 1px solid #000;
+        font-size: 18px;
+        line-height: 20px;
+    }
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+        border-collapse: collapse;
+    }
+    .invoice-box table td {
+        padding: 4px;
+        vertical-align: top;
+    }
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #000;
+        font-weight: bold;
+        text-align: left;
+    }
+    .centered-info {
+        text-align: center;
+        padding-top: 10px;
+    }
+    .summary-table {
+        margin-top: 10px;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .summary-table td {
+        padding: 4px;
+        border: 1px solid #000;
+        white-space: nowrap;
+    }
+    .summary-table td:first-child {
+        font-weight: bold;
+    }
+    .message, .no-returns {
+        text-align: center;
+        padding-top: 12px;
+        font-size: 18px;
+    }
+    @media print {
+        body {
+            width: 58mm;
+            margin: 0;
+            padding: 0;
+        }
+        .invoice-box {
+            border: none;
+            font-size: 18px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="invoice-box">
+        <div class="centered-info">
+            <!-- Logo de la tienda -->
+            <img src="https://lh3.googleusercontent.com/VgHT0RL87ml-R4bVVx79l0fAHto5sj3HGRN00S_7a_27YrXzvL73BC40vb5gXksJpJuhiqiAMZ8cZwDshw=s265-w265-h265" style="width: 200px; max-width: 200px;">
+            <p style="margin: 2px 0;"><strong>@elizabethsclosetrd</strong></p>
+            <p style="margin: 2px 0;">+18294494250</strong></p>
+            <p><strong>Orden No.: <?= codigo ?></strong></p>
+        </div>
+        
+        <div class="summary">
+            <p><strong>Cliente:</strong> <?= nomcliente ?></p>
+            <p><strong>Teléfono:</strong> <?= cliente_cel ?></p>
+            <p><strong>Destino:</strong> <?= nombreCalle ?></p>
+            <p><strong>M. de pago:</strong> <?= mpago?></p>
+            
+        </div>
+        
+        <!-- Sección de resumen en formato de tabla -->
+        <table class="summary-table">
+            <tr>
+                <td>Subtotal:</td>
+                <td style="text-align: right;">$<?= subtotal ?></td>
+            </tr>
+            <tr>
+                <td>Envío:</td>
+                <td style="text-align: right;">$<?= impto ?></td>
+            </tr>
+            <tr>
+                <td>Total:</td>
+                <td style="text-align: right;">$<?= totalventa ?></td>
+            </tr>
+        </table>
+
+        <div class="message">
+            ¡Gracias por su compra!
+        </div>
+        <div class="no-returns">
+            <p><strong>NO ACEPTAMOS DEVOLUCIONES</strong></p>
+        </div>
+    </div>
+
+    <!-- Script para abrir la ventana de impresión -->
+    <script>
+        window.onload = function() {
+            window.print();
+        };
+    </script>
+</body>
+</html>
